@@ -1,6 +1,9 @@
 class Competition < ApplicationRecord
   validates :name, presence: true
 
+  has_many :competition_teams
+  has_many :teams, through: :competition_teams
+
   # Double Round Robin: every team plays each other twice in a single big group
   # Groups: Teams are assigned groups, the best team(s) in each group
   # advance to a single round robin stage

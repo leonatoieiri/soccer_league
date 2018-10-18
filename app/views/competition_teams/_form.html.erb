@@ -1,0 +1,42 @@
+<%= form_with(model: competition_team, local: true) do |form| %>
+  <% if competition_team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(competition_team.errors.count, "error") %> prohibited this competition_team from being saved:</h2>
+
+      <ul>
+      <% competition_team.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :competition_id %>
+    <%= form.number_field :competition_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :team_id %>
+    <%= form.number_field :team_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :points %>
+    <%= form.number_field :points %>
+  </div>
+
+  <div class="field">
+    <%= form.label :goal_difference %>
+    <%= form.number_field :goal_difference %>
+  </div>
+
+  <div class="field">
+    <%= form.label :place %>
+    <%= form.number_field :place %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Competition:</strong>
+  <%= @competition_team.competition_id %>
+</p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @competition_team.team_id %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @competition_team.points %>
+</p>
+
+<p>
+  <strong>Goal difference:</strong>
+  <%= @competition_team.goal_difference %>
+</p>
+
+<p>
+  <strong>Place:</strong>
+  <%= @competition_team.place %>
+</p>
+
+<%= link_to 'Edit', edit_competition_team_path(@competition_team) %> |
+<%= link_to 'Back', competition_teams_path %>
