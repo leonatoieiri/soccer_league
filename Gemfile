@@ -63,3 +63,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Figaro helps setting environment variables
 gem 'figaro'
+
+# Helps with CRUDs layout
+gem 'rails_admin', '~> 1.3'
