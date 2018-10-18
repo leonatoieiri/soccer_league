@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :competitions
   resources :players
   resources :teams
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
