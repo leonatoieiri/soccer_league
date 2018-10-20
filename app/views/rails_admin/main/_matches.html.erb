@@ -1,11 +1,30 @@
 <% matches.each do |match| %>
   <tr>
-    <td><%= match.group_id %></td>
-    <td><%= match.home_team.name %></td>
-    <td><%= match.home_team_score %></td>
-    <td><%= match.visitor_team_score %></td>
-    <td><%= match.visitor_team.name %></td>
-    <td><%= match.winner %></td>
-    <td><%= match.status %></td>
+    <%= form_with url: "/update_score/#{match.id}" do %>
+      <td><%= match.group_id %></td>
+      <td><%= match.home_team.name %></td>
+      <% if match.status == 'done' %>
+        <td><%= match.home_team_score %></td>
+        <td><%= match.visitor_team_score %></td>
+      <% else %>
+        <td>
+          <%= number_field(:match, :home_team_score,
+            value: match.home_team_score, min: 0) %>
+        </td>
+        <td>
+          <%= number_field(:match, :visitor_team_score,
+            value: match.visitor_team_score) %>
+        </td>
+      <% end %>
+
+      <td><%= match.visitor_team.name %></td>
+      <td><%= match.winner %></td>
+      <td><%= match.status %></td>
+      <td>
+        <% unless match.status == 'done' %>
+          <%= submit_tag 'Update Score', class: 'btn btn-info' %>
+        <% end %>
+      </td>
+    <% end %>
   </tr>
 <% end %>

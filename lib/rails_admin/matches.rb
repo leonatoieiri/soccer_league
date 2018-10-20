@@ -23,8 +23,6 @@ module RailsAdmin
 
         register_instance_option :controller do
           Proc.new do
-            pp 'OBJECTION'
-            pp @object
             @matches = @object.matches
           end
         end

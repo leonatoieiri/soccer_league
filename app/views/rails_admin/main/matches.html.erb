@@ -14,10 +14,11 @@
       <th>Visitor team</th>
       <th>Winner</th>
       <th>Status</th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody id="matches_table">
-    <%= render partial: 'matches', locals: {matches: @object.matches} %>
+    <%= render partial: 'matches', locals: {matches: @matches} %>
   </tbody>
 </table>

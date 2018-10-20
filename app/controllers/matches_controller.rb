@@ -1,6 +1,20 @@
 class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy]
 
+  # POST /update_score
+  def update_score
+    match = Match.find(params[:id])
+    match.home_team_score = params["match"]["home_team_score"]
+    match.visitor_team_score = params["match"]["visitor_team_score"]
+    match.status = :done
+    match.save
+
+    @competition = match.competition
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /matches
   # GET /matches.json
   def index
