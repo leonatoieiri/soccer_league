@@ -37,3 +37,7 @@ en:
         menu: 'Matches'
         title: 'Matches'
         breadcrumb: 'Matches'
+      teams:
+        menu: 'Teams'
+        title: 'Teams'
+        breadcrumb: 'Teams'

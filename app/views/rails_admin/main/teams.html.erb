@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Name</th>
+      <th>Points</th>
+      <th>Goal Difference</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comp_teams.each do |comp_team| %>
+      <tr>
+        <td><%= comp_team.place %></td>
+        <td><%= comp_team.team.name %></td>
+        <td><%= comp_team.points %></td>
+        <td><%= comp_team.goal_difference %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
