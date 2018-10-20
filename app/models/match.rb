@@ -23,7 +23,7 @@ class Match < ApplicationRecord
         self.winner = :visitor_team
       else
         self.winner = :draw
-      end        
+      end
     end
   end
 
@@ -48,6 +48,8 @@ class Match < ApplicationRecord
 
       comp_home_team.save
       comp_visitor_team.save
+
+      CompetitionResultUpdateJob.perform_later(self.competition_id)
     end
   end
 
