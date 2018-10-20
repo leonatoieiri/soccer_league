@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
-<h1>Matches</h1>
+<div class="">
+  <%= link_to 'Generate Matches', "/generate_matches/#{@object.id}",
+  remote: true, class: 'btn btn-info' %>
+</div>
 
 <table class="table table-condensed table-striped">
   <thead>
@@ -14,18 +17,8 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @object.matches.each do |match| %>
-      <tr>
-        <td><%= match.group_id %></td>
-        <td><%= match.home_team.name %></td>
-        <td><%= match.visitor_team.name %></td>
-        <td><%= match.home_team_score %></td>
-        <td><%= match.visitor_team_score %></td>
-        <td><%= match.winner %></td>
-        <td><%= match.status %></td>
-      </tr>
-    <% end %>
+  <tbody id="matches_table">
+    <%= render partial: 'matches', locals: {matches: @object.matches} %>
   </tbody>
 
   <tbody>

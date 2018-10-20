@@ -1,6 +1,15 @@
 class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
 
+  # GET /generate_matches
+  def generate_matches
+    @competition = Competition.find(params[:id])
+    @competition.generate_matches
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /competitions
   # GET /competitions.json
   def index
