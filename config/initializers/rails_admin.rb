@@ -43,5 +43,7 @@ RailsAdmin.config do |config|
     ## With an audit adapter, you can add:
     # history_index
     # history_show
+
+    config.excluded_models = ["Match", "CompetitionTeam"]
   end
 end
