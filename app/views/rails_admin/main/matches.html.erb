@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<h1>Matches</h1>
+
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Group</th>
+      <th>Home team</th>
+      <th>Visitor team</th>
+      <th>Home team score</th>
+      <th>Visitor team score</th>
+      <th>Winner</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @object.matches.each do |match| %>
+      <tr>
+        <td><%= match.group_id %></td>
+        <td><%= match.home_team.name %></td>
+        <td><%= match.visitor_team.name %></td>
+        <td><%= match.home_team_score %></td>
+        <td><%= match.visitor_team_score %></td>
+        <td><%= match.winner %></td>
+        <td><%= match.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+  <tbody>
+  </tbody>
+</table>

@@ -1,3 +1,6 @@
+require Rails.root.join('lib', 'rails_admin', 'matches.rb')
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Matches)
+
 RailsAdmin.config do |config|
 
   ### Popular gems integration
@@ -32,6 +35,7 @@ RailsAdmin.config do |config|
     show
     edit
     delete
+    matches
 
     ## With an audit adapter, you can add:
     # history_index
