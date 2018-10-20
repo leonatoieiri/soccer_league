@@ -9,9 +9,9 @@
     <tr>
       <th>Group</th>
       <th>Home team</th>
-      <th>Visitor team</th>
       <th>Home team score</th>
       <th>Visitor team score</th>
+      <th>Visitor team</th>
       <th>Winner</th>
       <th>Status</th>
     </tr>
@@ -19,8 +19,5 @@
 
   <tbody id="matches_table">
     <%= render partial: 'matches', locals: {matches: @object.matches} %>
-  </tbody>
-
-  <tbody>
   </tbody>
 </table>
