@@ -22,13 +22,23 @@
   </div>
 
   <div class="field">
-    <%= form.label :format %>
-    <%= form.number_field :format %>
+    <%= form.label :tournament_format %>
+    <%= form.number_field :tournament_format %>
   </div>
 
   <div class="field">
     <%= form.label :status %>
     <%= form.number_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.date_select :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_select :end_date %>
   </div>
 
   <div class="actions">

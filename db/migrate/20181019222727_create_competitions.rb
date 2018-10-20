@@ -3,8 +3,10 @@ class CreateCompetitions < ActiveRecord::Migration[5.2]
     create_table :competitions do |t|
       t.string :name
       t.integer :year
-      t.integer :format, default: 0
+      t.integer :tournament_format, default: 0
       t.integer :status, default: 0
+      t.date :start_date
+      t.date :end_date
 
       t.timestamps
     end

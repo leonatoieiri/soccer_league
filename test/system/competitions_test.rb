@@ -14,9 +14,11 @@ class CompetitionsTest < ApplicationSystemTestCase
     visit competitions_url
     click_on "New Competition"
 
-    fill_in "Format", with: @competition.format
+    fill_in "End Date", with: @competition.end_date
     fill_in "Name", with: @competition.name
+    fill_in "Start Date", with: @competition.start_date
     fill_in "Status", with: @competition.status
+    fill_in "Tournament Format", with: @competition.tournament_format
     fill_in "Year", with: @competition.year
     click_on "Create Competition"
 
@@ -28,9 +30,11 @@ class CompetitionsTest < ApplicationSystemTestCase
     visit competitions_url
     click_on "Edit", match: :first
 
-    fill_in "Format", with: @competition.format
+    fill_in "End Date", with: @competition.end_date
     fill_in "Name", with: @competition.name
+    fill_in "Start Date", with: @competition.start_date
     fill_in "Status", with: @competition.status
+    fill_in "Tournament Format", with: @competition.tournament_format
     fill_in "Year", with: @competition.year
     click_on "Update Competition"
 

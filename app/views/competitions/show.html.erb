@@ -11,13 +11,23 @@
 </p>
 
 <p>
-  <strong>Format:</strong>
-  <%= @competition.format %>
+  <strong>Tournament format:</strong>
+  <%= @competition.tournament_format %>
 </p>
 
 <p>
   <strong>Status:</strong>
   <%= @competition.status %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @competition.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @competition.end_date %>
 </p>
 
 <%= link_to 'Edit', edit_competition_path(@competition) %> |

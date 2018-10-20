@@ -17,7 +17,7 @@ class CompetitionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create competition" do
     assert_difference('Competition.count') do
-      post competitions_url, params: { competition: { format: @competition.format, name: @competition.name, status: @competition.status, year: @competition.year } }
+      post competitions_url, params: { competition: { end_date: @competition.end_date, name: @competition.name, start_date: @competition.start_date, status: @competition.status, tournament_format: @competition.tournament_format, year: @competition.year } }
     end
 
     assert_redirected_to competition_url(Competition.last)
@@ -34,7 +34,7 @@ class CompetitionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update competition" do
-    patch competition_url(@competition), params: { competition: { format: @competition.format, name: @competition.name, status: @competition.status, year: @competition.year } }
+    patch competition_url(@competition), params: { competition: { end_date: @competition.end_date, name: @competition.name, start_date: @competition.start_date, status: @competition.status, tournament_format: @competition.tournament_format, year: @competition.year } }
     assert_redirected_to competition_url(@competition)
   end
 
