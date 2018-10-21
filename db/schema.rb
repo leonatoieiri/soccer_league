@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_21_015127) do
+ActiveRecord::Schema.define(version: 2018_10_21_152147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "brackets", force: :cascade do |t|
+    t.integer "match_id"
+    t.integer "round", default: 2
+    t.integer "home_team_origin_type", default: 0
+    t.integer "visitor_team_origin_type", default: 0
+    t.integer "home_team_origin_id"
+    t.integer "visitor_team_origin_id"
+    t.integer "home_team_id"
+    t.integer "visitor_team_id"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "competition_teams", force: :cascade do |t|
     t.integer "competition_id"
@@ -66,6 +80,7 @@ ActiveRecord::Schema.define(version: 2018_10_21_015127) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tournament_stage", default: 0
   end
 
   create_table "players", force: :cascade do |t|

@@ -44,7 +44,7 @@ class Competition < ApplicationRecord
       permutation = teams.permutation(2)
       permutation.each do |p|
         Match.find_or_create_by(group_id: group.id, competition_id: self.id,
-          home_team_id: p[0], visitor_team_id: p[1])
+          home_team_id: p[0], visitor_team_id: p[1], tournament_stage: :groups)
       end
     end
   end

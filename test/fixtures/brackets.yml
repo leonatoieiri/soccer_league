@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  match_id: 1
+  round: 1
+  home_team_origin_type: 1
+  visitor_team_origin_type: 1
+  home_team_origin_id: 1
+  visitor_team_origin_id: 1
+  home_team_id: 1
+  visitor_team_id: 1
+  status: 1
+
+two:
+  match_id: 1
+  round: 1
+  home_team_origin_type: 1
+  visitor_team_origin_type: 1
+  home_team_origin_id: 1
+  visitor_team_origin_id: 1
+  home_team_id: 1
+  visitor_team_id: 1
+  status: 1

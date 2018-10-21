@@ -13,9 +13,13 @@ class Match < ApplicationRecord
   enum winner: { draw: 0, home_team: 1, visitor_team: 2 }
   enum status: { plan: 0, ongoing: 1, done: 2 }
 
+  # Points: matches for double round robin competitions
+  # Groups: matches for groups stage of groups competitions
+  # Elimination: matches after group stage for group competitions
+  enum tournament_stage: { points: 0, groups: 1, elimination: 2 }
+
   before_save :set_winner
-  after_save :update_competition
-  after_save :update_group
+  after_save :update_competition_or_group
 
   def set_winner
     if self.done?
@@ -29,34 +33,41 @@ class Match < ApplicationRecord
     end
   end
 
-  def update_competition
-    if self.done?
-      comp_home_team = CompetitionTeam.find_by(
-        competition_id: self.competition_id, team_id: self.home_team_id)
-      comp_visitor_team = CompetitionTeam.find_by(
-        competition_id: self.competition_id, team_id: self.visitor_team_id)
+  def update_competition_or_group
+    if self.done? and (self.points? or self.groups?)
+      if self.points?
+        home_team = CompetitionTeam.find_by(
+          competition_id: self.competition_id, team_id: self.home_team_id)
+        visitor_team = CompetitionTeam.find_by(
+          competition_id: self.competition_id, team_id: self.visitor_team_id)
+      else
+        home_team = GroupTeam.find_by(group_id: self.group_id,
+          team_id: self.home_team_id)
+        visitor_team = GroupTeam.find_by(group_id: self.group_id,
+          team_id: self.visitor_team_id)
+      end
       goal_difference = self.home_team_score - self.visitor_team_score
-      comp_home_team.goal_difference += goal_difference
-      comp_visitor_team.goal_difference -= goal_difference
+      home_team.goal_difference += goal_difference
+      visitor_team.goal_difference -= goal_difference
 
       if self.draw?
-        comp_home_team.points += 1
-        comp_visitor_team.points += 1
+        home_team.points += 1
+        visitor_team.points += 1
       elsif self.home_team?
-        comp_home_team.points += 3
+        home_team.points += 3
       else
-        comp_visitor_team.points += 3
+        visitor_team.points += 3
       end
 
-      comp_home_team.save
-      comp_visitor_team.save
+      home_team.save
+      visitor_team.save
 
-      CompetitionResultUpdateJob.perform_later(self.competition_id)
+      if self.points?
+        CompetitionResultUpdateJob.perform_later(self.competition_id)
+      else
+        GroupResultUpdateJob.perform_later(self.competition_id)
+      end
     end
-  end
-
-  def update_group
-    pp 'WIP'
   end
 
   def different_teams
