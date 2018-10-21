@@ -23,7 +23,7 @@ module RailsAdmin
 
         register_instance_option :controller do
           Proc.new do
-            @matches = @object.matches
+            @matches = @object.matches.order(id: :asc)
           end
         end
       end

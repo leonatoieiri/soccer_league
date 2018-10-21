@@ -11,6 +11,8 @@ class Bracket < ApplicationRecord
   enum visitor_team_origin_type: { visitor_bracket: 0, visitor_group: 1 }
   enum status: { plan: 0, ongoing: 1, done: 2 }
 
+  before_save :create_match
+
   def round_name
     if self.round == 2
       'Grand finals'
@@ -38,6 +40,16 @@ class Bracket < ApplicationRecord
       "Winner of bracket id #{self.visitor_team_origin_id}"
     else
       "First place of group id #{self.visitor_team_origin_id}"
+    end
+  end
+
+  def create_match
+    if self.home_team_id and self.visitor_team_id and self.match_id.blank?
+      match = Match.create(competition_id: self.competition_id,
+        home_team_id: self.home_team_id,
+        visitor_team_id: self.visitor_team_id,
+        tournament_stage: :elimination)
+      self.match_id = match.id
     end
   end
 end

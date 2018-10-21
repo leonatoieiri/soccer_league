@@ -47,6 +47,6 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
 
-    config.excluded_models = ["Match", "CompetitionTeam", "GroupTeam"]
+    config.excluded_models = ["Match", "CompetitionTeam", "GroupTeam", "Bracket", "Group"]
   end
 end

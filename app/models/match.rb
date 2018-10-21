@@ -63,9 +63,9 @@ class Match < ApplicationRecord
       visitor_team.save
 
       if self.points?
-        CompetitionResultsUpdateJob.perform_later(self.competition_id)
+        CompetitionResultsUpdateJob.perform_now(self.competition_id)
       else
-        GroupResultsUpdateJob.perform_later(self.competition_id)
+        GroupResultsUpdateJob.perform_now(self.group_id)
       end
     end
   end
