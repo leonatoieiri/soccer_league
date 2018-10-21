@@ -1,4 +1,4 @@
-class GroupResultUpdateJob < ApplicationJob
+class GroupResultsUpdateJob < ApplicationJob
   queue_as :default
 
   def perform(group_id)

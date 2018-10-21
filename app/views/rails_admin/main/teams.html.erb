@@ -3,6 +3,9 @@
 <table class="table table-condensed table-striped">
   <thead>
     <tr>
+      <% if @object.groups? %>
+        <th>Group</th>
+      <% end %>
       <th>Place</th>
       <th>Name</th>
       <th>Points</th>
@@ -13,6 +16,9 @@
   <tbody>
     <% @comp_teams.each do |comp_team| %>
       <tr>
+        <% if @object.groups? %>
+          <td><%= comp_team.group.name %></td>
+        <% end %>
         <td><%= comp_team.place %></td>
         <td><%= comp_team.team.name %></td>
         <td><%= comp_team.points %></td>

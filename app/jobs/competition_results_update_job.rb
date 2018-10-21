@@ -1,4 +1,4 @@
-class CompetitionResultUpdateJob < ApplicationJob
+class CompetitionResultsUpdateJob < ApplicationJob
   queue_as :default
 
   def perform(competition_id)

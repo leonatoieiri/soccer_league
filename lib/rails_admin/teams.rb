@@ -23,7 +23,14 @@ module RailsAdmin
 
         register_instance_option :controller do
           Proc.new do
-            @comp_teams = @object.competition_teams
+            if @object.groups?
+              groups = @object.groups.pluck(:id)
+              @comp_teams = GroupTeam.where(group_id: groups)
+                .order(group_id: :asc, place: :asc)
+            else
+              @comp_teams = @object.competition_teams
+            end
+
           end
         end
       end
