@@ -41,3 +41,7 @@ en:
         menu: 'Teams'
         title: 'Teams'
         breadcrumb: 'Teams'
+      brackets:
+        menu: 'Brackets'
+        title: 'Brackets'
+        breadcrumb: 'Brackets'

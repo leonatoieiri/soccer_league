@@ -2,6 +2,8 @@ require Rails.root.join('lib', 'rails_admin', 'matches.rb')
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Matches)
 require Rails.root.join('lib', 'rails_admin', 'teams.rb')
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Teams)
+require Rails.root.join('lib', 'rails_admin', 'brackets.rb')
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Brackets)
 
 RailsAdmin.config do |config|
 
@@ -39,6 +41,7 @@ RailsAdmin.config do |config|
     delete
     matches
     teams
+    brackets
 
     ## With an audit adapter, you can add:
     # history_index

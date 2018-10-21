@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Round</th>
+      <th>Team 1</th>
+      <th>Team 2</th>
+      <th>Status</th>
+      <th>Match</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @brackets.each do |bracket| %>
+      <tr>
+        <td><%= bracket.round_name %></td>
+        <td><%= bracket.home_team_name %></td>
+        <td><%= bracket.visitor_team_name %></td>
+        <td><%= bracket.status %></td>
+        <td><%= bracket.match_id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
