@@ -1,7 +1,7 @@
 <% matches.each do |match| %>
   <tr>
     <%= form_with url: "/update_score/#{match.id}" do %>
-      <td><%= match.group_id %></td>
+      <td><%= match.group.name unless match.group_id.blank? %></td>
       <td><%= match.home_team.name %></td>
       <% if match.status == 'done' %>
         <td><%= match.home_team_score %></td>

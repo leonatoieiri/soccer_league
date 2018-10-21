@@ -4,7 +4,11 @@ class CompetitionsController < ApplicationController
   # GET /generate_matches
   def generate_matches
     @competition = Competition.find(params[:id])
-    @competition.generate_matches
+    if @competition.tournament_format == :double_rr
+      @competition.generate_matches
+    else
+      @competition.generate_groups
+    end
     respond_to do |format|
       format.js
     end

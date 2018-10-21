@@ -6,6 +6,7 @@ class Match < ApplicationRecord
   validate :different_teams
 
   belongs_to :competition
+  belongs_to :group, optional: true
   belongs_to :home_team, class_name: 'Team', foreign_key: 'home_team_id'
   belongs_to :visitor_team, class_name: 'Team', foreign_key: 'visitor_team_id'
 
@@ -14,6 +15,7 @@ class Match < ApplicationRecord
 
   before_save :set_winner
   after_save :update_competition
+  after_save :update_group
 
   def set_winner
     if self.done?
@@ -51,6 +53,10 @@ class Match < ApplicationRecord
 
       CompetitionResultUpdateJob.perform_later(self.competition_id)
     end
+  end
+
+  def update_group
+    pp 'WIP'
   end
 
   def different_teams
