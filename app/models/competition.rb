@@ -5,6 +5,7 @@ class Competition < ApplicationRecord
   has_many :teams, through: :competition_teams
   has_many :matches
   has_many :groups
+  has_many :brackets
 
   # Double Round Robin: every team plays each other twice in a single big group
   # Groups: Teams are assigned groups, the best team(s) in each group
@@ -41,11 +42,28 @@ class Competition < ApplicationRecord
 
     groups.each do |group|
       teams = group.teams.pluck(:id)
-      permutation = teams.permutation(2)
+      permutation = teams.combination(2)
       permutation.each do |p|
         Match.find_or_create_by(group_id: group.id, competition_id: self.id,
           home_team_id: p[0], visitor_team_id: p[1], tournament_stage: :groups)
       end
+    end
+
+    GenerateBracketJob.perform_later(self.id)
+  end
+
+  def generate_brackets previous_round
+    brackets = Bracket.where(competition_id: self.id, round: previous_round)
+    brackets.each_slice(2) do |slice|
+      Bracket.create(round: brackets.size,
+        competition_id: self.id,
+        home_team_origin_type: :home_bracket,
+        home_team_origin_id: slice[0].id,
+        visitor_team_origin_type: :visitor_bracket,
+        visitor_team_origin_id: slice[1].id)
+    end
+    if brackets.size > 2
+      self.generate_brackets brackets.size
     end
   end
 end

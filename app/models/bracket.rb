@@ -1,4 +1,5 @@
 class Bracket < ApplicationRecord
+  belongs_to :competition
   belongs_to :match, optional: true
   belongs_to :home_team, class_name: 'Team', foreign_key: 'home_team_id',
     optional: true
