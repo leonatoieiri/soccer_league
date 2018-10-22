@@ -19,7 +19,7 @@ class Match < ApplicationRecord
   enum tournament_stage: { points: 0, groups: 1, elimination: 2 }
 
   before_save :set_winner
-  after_save :update_competition_or_group
+  after_save :update_points
   after_save :update_bracket
 
   def set_winner
@@ -34,7 +34,7 @@ class Match < ApplicationRecord
     end
   end
 
-  def update_competition_or_group
+  def update_points
     if self.done? and (self.points? or self.groups?)
       if self.points?
         home_team = CompetitionTeam.find_by(
@@ -95,6 +95,9 @@ class Match < ApplicationRecord
           next_bracket.visitor_team_id = winner_team_id
           next_bracket.save
         end
+      end
+      if bracket.round == 2
+        self.competition.done!
       end
     end
   end
