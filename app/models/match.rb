@@ -20,6 +20,7 @@ class Match < ApplicationRecord
 
   before_save :set_winner
   after_save :update_competition_or_group
+  after_save :update_bracket
 
   def set_winner
     if self.done?
@@ -66,6 +67,34 @@ class Match < ApplicationRecord
         CompetitionResultsUpdateJob.perform_now(self.competition_id)
       else
         GroupResultsUpdateJob.perform_now(self.group_id)
+      end
+    end
+  end
+
+  def update_bracket
+    if self.done? and self.elimination?
+      winner_team_id = self.winner == "home_team" ? self.home_team_id : self.visitor_team_id
+      bracket = Bracket.find_by(match_id: self.id)
+      if bracket.blank?
+        return
+      end
+      bracket.done!
+      next_bracket = Bracket.find_by(competition_id: self.competition_id,
+        home_team_origin_type: :home_bracket,
+        home_team_origin_id: bracket.id)
+      if next_bracket.present?
+        next_bracket.home_team_id = winner_team_id
+        next_bracket.save
+      end
+      if next_bracket.blank?
+        next_bracket = Bracket.find_by(
+          competition_id: self.competition_id,
+          visitor_team_origin_type: :home_bracket,
+          visitor_team_origin_id: bracket.id)
+        if next_bracket.present?
+          next_bracket.visitor_team_id = winner_team_id
+          next_bracket.save
+        end
       end
     end
   end
