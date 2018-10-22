@@ -45,3 +45,7 @@ en:
         menu: 'Brackets'
         title: 'Brackets'
         breadcrumb: 'Brackets'
+      results:
+        menu: 'Results'
+        title: 'Results'
+        breadcrumb: 'Results'

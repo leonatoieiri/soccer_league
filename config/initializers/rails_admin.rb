@@ -4,6 +4,8 @@ require Rails.root.join('lib', 'rails_admin', 'teams.rb')
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Teams)
 require Rails.root.join('lib', 'rails_admin', 'brackets.rb')
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Brackets)
+require Rails.root.join('lib', 'rails_admin', 'results.rb')
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Results)
 
 RailsAdmin.config do |config|
 
@@ -42,6 +44,7 @@ RailsAdmin.config do |config|
     matches
     teams
     brackets
+    results
 
     ## With an audit adapter, you can add:
     # history_index

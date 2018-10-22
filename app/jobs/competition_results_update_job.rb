@@ -8,7 +8,7 @@ class CompetitionResultsUpdateJob < ApplicationJob
     comp_teams.each_with_index do |team, index|
       team.update(place: index + 1)
     end
-    if competition.matches.where.not(status: :done)
+    if competition.matches.where.not(status: :done).blank?
       competition.done!
     end
   end

@@ -6,7 +6,7 @@ module RailsAdmin
       class Brackets < RailsAdmin::Config::Actions::Base
         # This ensures the action only shows up for Users
         register_instance_option :visible? do
-          authorized? && bindings[:abstract_model].param_key == "competition"
+          authorized? && bindings[:abstract_model].param_key == "competition" && bindings[:object].groups?
         end
 
         # We want the action on members, not the Users collection
