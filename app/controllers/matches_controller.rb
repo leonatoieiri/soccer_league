@@ -4,10 +4,7 @@ class MatchesController < ApplicationController
   def update_score
     match = Match.find(params[:id])
     if params["match"]
-      match.home_team_score = params["match"]["home_team_score"]
-      match.visitor_team_score = params["match"]["visitor_team_score"]
-      match.status = :done
-      match.save
+      match.set_score params["match"]
     end
 
     @competition = match.competition

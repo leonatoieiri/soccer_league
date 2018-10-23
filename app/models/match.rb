@@ -22,6 +22,13 @@ class Match < ApplicationRecord
   after_save :update_points
   after_save :update_bracket
 
+  def set_score match
+    self.home_team_score = match["home_team_score"]
+    self.visitor_team_score = match["visitor_team_score"]
+    self.status = :done
+    self.save
+  end
+
   def winner_team
     self.winner == "home_team" ? self.home_team : self.visitor_team
   end

@@ -13,6 +13,30 @@ class Competition < ApplicationRecord
   enum tournament_format: { double_rr: 0, groups: 1 }
   enum status: { plan: 0, ongoing: 1, done: 2 }
 
+  def simulate matches
+    teams = {}
+    self.competition_teams.each do |comp_team|
+      teams[comp_team.team_id.to_s] = comp_team
+    end
+
+    matches.each do |match_id, data|
+      goal_difference = data["home_team_score"].to_i - data["visitor_team_score"].to_i
+      teams[data["home_team_id"]].goal_difference += goal_difference
+      teams[data["visitor_team_id"]].goal_difference -= goal_difference
+      if goal_difference > 0
+        teams[data["home_team_id"]].points += 3
+      elsif goal_difference < 0
+        teams[data["visitor_team_id"]].points += 3
+      else
+        teams[data["home_team_id"]].points += 1
+        teams[data["visitor_team_id"]].points += 1
+      end
+    end
+
+    teams = teams.values.sort_by { |team| [team.points, team.goal_difference] }
+    teams.reverse
+  end
+
   def generate_matches
     teams = self.teams.where(status: :active).order("RANDOM()").pluck(:id)
     permutation = teams.permutation(2)
