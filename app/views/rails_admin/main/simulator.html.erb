@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<div id="simulation_result">
+  
+</div>
+
+<%= form_with url: "/simulate/#{@object.id}" do %>
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Home team</th>
+        <th>Home team score</th>
+        <th>Visitor team score</th>
+        <th>Visitor team</th>
+        <th>Winner</th>
+      </tr>
+    </thead>
+
+    <tbody id="matches_table">
+      <% @matches.each do |match| %>
+        <tr>
+          <td><%= match.home_team.name %></td>
+          <% if match.status == 'done' %>
+            <td><%= match.home_team_score %></td>
+            <td><%= match.visitor_team_score %></td>
+          <% else %>
+            <%= hidden_field("match[#{match.id}]", :home_team_id,
+              value: match.home_team_id) %>
+            <%= hidden_field("match[#{match.id}]", :visitor_team_id,
+              value: match.visitor_team_id) %>
+            <td>
+              <%= number_field("match[#{match.id}]", :home_team_score,
+                value: match.home_team_score, min: 0) %>
+            </td>
+            <td>
+              <%= number_field("match[#{match.id}]", :visitor_team_score,
+                value: match.visitor_team_score) %>
+            </td>
+          <% end %>
+          <td><%= match.visitor_team.name %></td>
+          <td><%= match.winner %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= submit_tag 'Simulate Results', class: 'btn btn-info' %>
+<% end %>

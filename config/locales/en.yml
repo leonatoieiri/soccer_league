@@ -49,3 +49,7 @@ en:
         menu: 'Results'
         title: 'Results'
         breadcrumb: 'Results'
+      simulator:
+        menu: 'Simulator'
+        title: 'Simulator'
+        breadcrumb: 'Simulator'

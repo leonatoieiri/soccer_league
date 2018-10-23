@@ -6,6 +6,8 @@ require Rails.root.join('lib', 'rails_admin', 'brackets.rb')
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Brackets)
 require Rails.root.join('lib', 'rails_admin', 'results.rb')
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Results)
+require Rails.root.join('lib', 'rails_admin', 'simulator.rb')
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Simulator)
 
 RailsAdmin.config do |config|
 
@@ -45,6 +47,7 @@ RailsAdmin.config do |config|
     teams
     brackets
     results
+    simulator
 
     ## With an audit adapter, you can add:
     # history_index

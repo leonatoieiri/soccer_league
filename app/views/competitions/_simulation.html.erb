@@ -1,0 +1,29 @@
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Name</th>
+      <th>Points</th>
+      <th>Goal Difference</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% teams.each_with_index do |team, index| %>
+      <tr>
+        <td>
+          <% if index == 0 %>
+            CHAMPION
+          <% elsif index == 1 %>
+            Runner-up
+          <% else %>
+            <%= (index + 1) %>
+          <% end %>
+        </td>
+        <td><%= team.team.name %></td>
+        <td><%= team.points %></td>
+        <td><%= team.goal_difference %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
