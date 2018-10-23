@@ -3,6 +3,7 @@
 <table class="table table-condensed table-striped">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Round</th>
       <th>Team 1</th>
       <th>Team 2</th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @brackets.each do |bracket| %>
       <tr>
+        <td><%= bracket.id %></td>
         <td><%= bracket.round_name %></td>
         <td><%= bracket.home_team_name %></td>
         <td><%= bracket.visitor_team_name %></td>

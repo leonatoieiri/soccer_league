@@ -29,7 +29,8 @@ class Bracket < ApplicationRecord
     elsif self.home_bracket?
       "Winner of bracket id #{self.home_team_origin_id}"
     else
-      "First place of group id #{self.home_team_origin_id}"
+      group = Group.find(self.home_team_origin_id)
+      "First place of #{group.name}"
     end
   end
 
