@@ -55,4 +55,34 @@ RailsAdmin.config do |config|
 
     config.excluded_models = ["Match", "CompetitionTeam", "GroupTeam", "Bracket", "Group"]
   end
+
+  config.model 'Competition' do
+    list do
+      field :name
+      field :year
+      field :tournament_format
+    end
+  end
+
+  config.model 'Player' do
+    list do
+      configure :created_at do
+        hide
+      end
+      configure :updated_at do
+        hide
+      end
+    end
+  end
+
+  config.model 'Team' do
+    list do
+      configure :created_at do
+        hide
+      end
+      configure :updated_at do
+        hide
+      end
+    end
+  end
 end
