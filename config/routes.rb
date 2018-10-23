@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  resources :matches
-  resources :competition_teams
-  resources :competitions
-  resources :players
-  resources :teams
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root to: 'rails_admin/main#dashboard'
